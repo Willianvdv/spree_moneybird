@@ -17,7 +17,8 @@ module SpreeMoneybird
         { description: line_item.variant.name,
           amount: line_item.quantity,
           created_at: line_item.created_at,
-          tax_rate_id: tax_rate.id }
+          tax_rate_id: tax_rate.id,
+          price: line_item.price }
       end
 
       attrs = { invoice: { company_name: 'xxx',

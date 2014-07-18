@@ -65,12 +65,20 @@ RSpec.configure do |config|
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with :truncation
+
   end
 
   # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.
   config.before :each do
     DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
     DatabaseCleaner.start
+
+    SpreeMoneybird::BaseResource.class_eval do
+      self.site = "https://#{ENV['MONEYBIRD_COMPANY']}.moneybird.nl"
+      self.user = ENV['MONEYBIRD_USER']
+      self.password = ENV['MONEYBIRD_PASSWORD']
+      self.proxy = ENV['PROXY'] if ENV['PROXY']
+    end
   end
 
   # After each spec clean the database.

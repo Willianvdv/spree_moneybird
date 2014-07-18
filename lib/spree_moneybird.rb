@@ -13,4 +13,6 @@ module SpreeMoneybird
 end
 
 require 'spree_moneybird/resources/base'
+require 'spree_moneybird/resources/tax_rate'
 require 'spree_moneybird/resources/contact'
+require 'spree_moneybird/resources/invoice'

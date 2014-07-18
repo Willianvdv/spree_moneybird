@@ -3,7 +3,7 @@ module SpreeMoneybird
     class InstallGenerator < Rails::Generators::Base
       class_option :auto_run_migrations, :type => :boolean, :default => false
 
-
+      argument :file_name, :type => :string, :desc => 'rails app_path', :default => '.'
 
       def copy_initializer_file
         template 'spree_moneybird.rb', "#{file_name}/config/initializers/spree_moneybird.rb"

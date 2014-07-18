@@ -3,18 +3,9 @@ require 'spec_helper'
 describe SpreeMoneybird::Contact do
   let(:order) do
     order = create :order
-    order.user.stub(:id) { SecureRandom.uuid  }# Prevents 422 (duplicate customer id)
-
+    # Prevent 422 (duplicate customer id)
+    order.user.stub(:id) { SecureRandom.uuid }
     order
-  end
-
-  before do
-    SpreeMoneybird::Contact.class_eval do
-      self.site = "https://#{ENV['MONEYBIRD_COMPANY']}.moneybird.nl"
-      self.user = ENV['MONEYBIRD_USER']
-      self.password = ENV['MONEYBIRD_PASSWORD']
-      self.proxy = ENV['PROXY'] if ENV['PROXY']
-    end
   end
 
   subject { SpreeMoneybird::Contact.from_order(order) }

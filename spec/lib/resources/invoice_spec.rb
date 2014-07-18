@@ -1,20 +1,19 @@
+require 'spec_helper'
 
 describe SpreeMoneybird::Invoice do
-  let(:order) do
+  subject do
     order = create :order_ready_to_ship
-    order.user.stub(:id) { SecureRandom.uuid  }# Prevents 422 (duplicate customer id)
+    order.user.stub(:id) { SecureRandom.uuid } # Prevents 422 (duplicate customer id)
     order
   end
 
-  subject { SpreeMoneybird::Invoice.from_order(order) }
-
   describe 'saving an invoice' do
     before do
-      subject.save
+      SpreeMoneybird::Invoice.create_invoice_from_order(subject)
     end
 
-    it 'assigns the id' do
-      expect(subject.id).not_to be_nil
+    it 'assigns the moneybird id' do
+      expect(subject.moneybird_id).not_to be_nil
     end
   end
 end

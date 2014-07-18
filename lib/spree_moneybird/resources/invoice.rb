@@ -1,7 +1,16 @@
 module SpreeMoneybird
   class Invoice < BaseResource
-    def self.from_order(order)
+    def self.create_invoice_from_order(order)
+      invoice = from_order(order)
+      invoice.save
 
+      order.moneybird_id = invoice.id
+      order.save!
+
+      invoice
+    end
+
+    def self.from_order(order)
       tax_rate = SpreeMoneybird::TaxRate.all.first # TODO: Fix hardcode tax setting
 
       details = order.line_items.map do |line_item|
@@ -14,7 +23,7 @@ module SpreeMoneybird
       attrs = { invoice: { company_name: 'xxx',
                            details_attributes: details } }
 
-       self.new attrs
+      self.new attrs
     end
 
   end

@@ -1,40 +1,25 @@
-SpreeMoneybird
-==============
+#Spree Moneybird
 
-Introduction goes here.
+We <3 Moneybird & Spree
 
-Installation
-------------
+## Todo's
+- Set the right tax setting
+- Discounts
+- Shipping costs?
+- Register payments
+- Sync state (cancel / pending / etc)
+- Credit note
+- Email the invoice to the customer
 
-Add spree_moneybird to your Gemfile:
+## Tests
 
-```ruby
-gem 'spree_moneybird'
+**Don't use your production moneybird credentials!**
+
+```
+MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy bundle exec rspec
 ```
 
-Bundle your dependencies and run the installation generator:
-
-```shell
-bundle
-bundle exec rails g spree_moneybird:install
+For debugging the API I use charles proxy. Simply add `PROXY` to env:
 ```
-
-Testing
--------
-
-Be sure to bundle your dependencies and then create a dummy test app for the specs to run against.
-
-```shell
-bundle
-bundle exec rake test_app
-bundle exec rspec spec
+PROXY='http://127.0.0.1:8888' MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy bundle exec rspec
 ```
-
-When testing your applications integration with this extension you may use it's factories.
-Simply add this require statement to your spec_helper:
-
-```ruby
-require 'spree_moneybird/factories'
-```
-
-Copyright (c) 2014 [name of extension creator], released under the New BSD License

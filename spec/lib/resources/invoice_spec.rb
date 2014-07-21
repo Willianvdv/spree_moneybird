@@ -11,7 +11,7 @@ describe SpreeMoneybird::Invoice do
     order
   end
 
-  describe 'saving an invoice' do
+  describe 'create an invoice' do
     context 'without contact syncronisation' do
       subject { order }
 
@@ -39,6 +39,19 @@ describe SpreeMoneybird::Invoice do
       it 'invoice has the moneybird contact id' do
         expect(subject.contact_id).to eql(moneybird_contact.id)
       end
+    end
+  end
+
+  describe 'send an invoice' do
+    before do
+      SpreeMoneybird::Invoice.create_invoice_from_order(order)
+      order.stub(:email) { 'mrwhite@example.com' }
+    end
+
+    subject { SpreeMoneybird::Invoice.send_invoice(order) }
+
+    it 'sends the invoice' do
+      expect(subject.email).not_to be_nil
     end
   end
 end

@@ -1,5 +1,16 @@
 module SpreeMoneybird
   class Invoice < BaseResource
+    def self.send_invoice(order)
+      invoice = self.from_order order
+
+      # There must be a nicer way to do this
+      invoie_send_data = ({ invoice: { email: order.email } }).to_json
+      invoice.put :send_invoice, nil, invoie_send_data
+
+
+      invoice
+    end
+
     def self.create_invoice_from_order(order)
       invoice = from_order(order)
       invoice.save
@@ -11,6 +22,8 @@ module SpreeMoneybird
     end
 
     def self.from_order(order)
+      return self.find(order.moneybird_id) unless order.moneybird_id.nil?
+
       tax_rate = SpreeMoneybird::TaxRate.all.first # TODO: Fix hardcode tax setting
 
       details_attributes = order.line_items.map do |line_item|

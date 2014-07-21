@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe SpreeMoneybird::Invoice do
+  before do
+    Spree::Order.any_instance.stub(:sync_with_moneybird)
+  end
+
   let(:order) do
     order = create :order_ready_to_ship
     order.user.stub(:id) { SecureRandom.uuid } # Prevents 422 (duplicate customer id)

@@ -3,6 +3,8 @@
 We <3 Moneybird & Spree
 
 ## Todo's
+- VCR for tests
+- Async moneybird post
 - Set the right tax setting
 - Discounts
 - Shipping costs?

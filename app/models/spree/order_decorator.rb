@@ -1,5 +1,5 @@
 Spree::Order.class_eval do
-  after_save :sync_with_moneybird
+  after_save :sync_with_moneybird, if: :complete?
 
   private
 

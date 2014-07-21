@@ -7,7 +7,6 @@ module SpreeMoneybird
       invoie_send_data = ({ invoice: { email: order.email } }).to_json
       invoice.put :send_invoice, nil, invoie_send_data
 
-
       invoice
     end
 

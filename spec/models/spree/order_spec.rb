@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe Spree::Order do
-  describe 'completed order' do
+  describe 'a completed order' do
     subject { build :order_ready_to_ship }
 
     before do
       SpreeMoneybird::Contact.stub(:create_contact_from_order)
       SpreeMoneybird::Invoice.stub(:create_invoice_from_order)
+      SpreeMoneybird::Invoice.stub(:send_invoice)
     end
 
     it 'syncronizes contact' do
@@ -20,12 +21,29 @@ describe Spree::Order do
                              .with(subject)
       subject.save!
     end
+
+    it 'does not send the moneybird invoice' do
+      subject.should_not_receive(:send_moneybird_invoice)
+      subject.save!
+    end
+
+    describe 'once shipped' do
+      before do
+        subject.update_attributes(shipment_state: 'shipped') # Set shipment state
+        subject.stub(:email) { 'mrwhite@example.com' }
+      end
+
+      it 'sends the moneybird invoice' do
+        SpreeMoneybird::Invoice.should_receive(:send_invoice).with(subject)
+        subject.save!
+      end
+    end
   end
 
   describe 'uncompleted order' do
     subject { build :order_with_totals }
 
-    it 'doesn\'t call the sync_with_moneybird method' do
+    it 'does not call the sync_with_moneybird method' do
       subject.should_not_receive(:sync_with_moneybird)
       subject.save!
     end

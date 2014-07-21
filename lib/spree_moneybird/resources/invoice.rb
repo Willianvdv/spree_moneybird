@@ -13,7 +13,7 @@ module SpreeMoneybird
     def self.from_order(order)
       tax_rate = SpreeMoneybird::TaxRate.all.first # TODO: Fix hardcode tax setting
 
-      details = order.line_items.map do |line_item|
+      details_attributes = order.line_items.map do |line_item|
         { description: line_item.variant.name,
           amount: line_item.quantity,
           created_at: line_item.created_at,
@@ -21,9 +21,10 @@ module SpreeMoneybird
           price: line_item.price }
       end
 
-      details << { description: "Verzending",
-                   price: order.ship_total,
-                   tax_rate_id: tax_rate.id }
+      # This will add a shipment rule to the invoice
+      details_attributes << { description: "Verzending",
+                              price: order.ship_total,
+                              tax_rate_id: tax_rate.id }
 
       attrs = { invoice: { contact_id: order.user.moneybird_id,
                            contact_name_search: order.billing_address.company,
@@ -35,7 +36,7 @@ module SpreeMoneybird
                            zipcode: order.billing_address.zipcode,
                            city: order.billing_address.city,
                            country: order.billing_address.country.iso_name,
-                           details_attributes: details } }
+                           details_attributes: details_attributes } }
 
       self.new attrs
     end

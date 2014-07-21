@@ -21,6 +21,10 @@ module SpreeMoneybird
           price: line_item.price }
       end
 
+      details << { description: "Verzending",
+                   price: order.ship_total,
+                   tax_rate_id: tax_rate.id }
+
       attrs = { invoice: { contact_id: order.user.moneybird_id,
                            contact_name_search: order.billing_address.company,
                            company_name: order.billing_address.company,

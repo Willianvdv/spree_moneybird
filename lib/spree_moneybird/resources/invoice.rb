@@ -12,7 +12,7 @@ module SpreeMoneybird
 
     def self.create_invoice_from_order(order)
       invoice = from_order(order)
-      invoice.save
+      invoice.save # Move this save to self.from_order
 
       order.moneybird_id = invoice.id
       order.save!
@@ -38,7 +38,7 @@ module SpreeMoneybird
                               price: order.ship_total,
                               tax_rate_id: tax_rate.id }
 
-      attrs = { invoice: { contact_id: order.user.moneybird_id,
+      attrs = { invoice: { contact_id: (order.user.moneybird_id if order.user),
                            contact_name_search: order.billing_address.company,
                            company_name: order.billing_address.company,
                            firstname: order.billing_address.firstname,

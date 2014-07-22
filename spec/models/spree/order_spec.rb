@@ -27,6 +27,17 @@ describe Spree::Order do
       subject.save!
     end
 
+    describe 'order is a guest checkout (it has no user)' do
+      before do
+        subject.user = nil
+      end
+
+      it 'does not sync the contact' do
+        subject.should_not_receive(:send_moneybird_invoice)
+        subject.save!
+      end
+    end
+
     describe 'once shipped' do
       before do
         subject.update_attributes(shipment_state: 'shipped') # Set shipment state

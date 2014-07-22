@@ -9,7 +9,27 @@ Spree::Order.class_eval do
   end
 
   def sync_with_moneybird
-    SpreeMoneybird::Contact.create_contact_from_order(self) if user.moneybird_id.nil?
-    SpreeMoneybird::Invoice.create_invoice_from_order(self) if moneybird_id.nil?
+    sync_with_contact
+    sync_with_invoice
+  end
+
+  def sync_with_contact
+    return unless user && user.moneybird_id.nil?
+
+    SpreeMoneybird::Contact.create_contact_from_order(self)
+
+  rescue Exception => e
+    Rails.logger.error e
+    Appsignal.add_exception(e) if defined? Appsignal
+  end
+
+  def sync_with_invoice
+    return unless moneybird_id.nil?
+
+    SpreeMoneybird::Invoice.create_invoice_from_order(self)
+
+  rescue Exception => e
+    Rails.logger.error e
+    Appsignal.add_exception(e) if defined? Appsignal
   end
 end

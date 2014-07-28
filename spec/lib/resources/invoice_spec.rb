@@ -13,14 +13,17 @@ describe SpreeMoneybird::Invoice do
 
   describe 'create an invoice' do
     context 'without contact syncronisation' do
-      subject { order }
-
-      before do
+      subject! do
         SpreeMoneybird::Invoice.create_invoice_from_order(order)
+        order
       end
 
-      it 'assigns the moneybird id' do
+      it 'stores the moneybird id' do
         expect(subject.moneybird_id).not_to be_nil
+      end
+
+      it 'stores the moneybird invoice id' do
+        expect(subject.moneybird_invoice_url).not_to be_nil
       end
     end
 

@@ -2,11 +2,9 @@ module SpreeMoneybird
   class Invoice < BaseResource
     def self.send_invoice(order)
       invoice = self.from_order order
-
-      invoie_send_data = ({ invoice: { email: order.email,
-                                       send_method: 'hand' } }).to_json
-      invoice.put :send_invoice, nil, invoie_send_data # There must be a nicer way to do this
-
+      invoie_send_data = { invoice: { email: order.email,
+                                      send_method: 'hand' } }
+      invoice.put :send_invoice, nil, invoie_send_data.to_json # There must be a nicer way to do this
       invoice
     end
 
@@ -15,6 +13,7 @@ module SpreeMoneybird
       invoice.save # Move this save to self.from_order
 
       order.moneybird_id = invoice.id
+      order.moneybird_invoice_url = invoice.url
       order.save!
 
       invoice
@@ -54,45 +53,3 @@ module SpreeMoneybird
     end
   end
 end
-
-# invoice[original_invoice_id]:
-# invoice[original_estimate_id]:
-# invoice[invoice_profile_id]:1
-
-# invoice[contact_id]:
-# invoice[contact_name_search]:testbedrijf3
-# invoice[company_name]:Test
-# invoice[firstname]:XX
-# invoice[lastname]:BEDRIJF
-# invoice[attention]:
-# invoice[address1]:cc
-# invoice[address2]:cc
-# invoice[zipcode]:1231
-# invoice[city]:ads
-# invoice[country]:asdasd
-
-# invoice[copy_contact_information]:0
-# invoice_due_date_interval_select:14
-# invoice[due_date_interval]:14
-# invoice[po_number]:
-# invoice[language]:nl
-# invoice[show_customer_id]:false
-# invoice[show_tax_number]:false
-# invoice[currency]:EUR
-
-# invoice[prices_are_incl_tax]:false
-# invoice[details_attributes][0][amount]:1 x
-# invoice[details_attributes][0][description]:123
-# invoice[details_attributes][0][price]:123
-# invoice[details_attributes][0][tax_rate_id]:411954
-# invoice[details_attributes][0][ledger_account_id]:
-# invoice[details_attributes][0][_destroy]:0
-# invoice[details_attributes][0][row_order]:0
-# invoice[details_attributes][1][amount]:1 x
-# invoice[details_attributes][1][description]:Klik hier om een nieuwe regel toe te voegen
-# invoice[details_attributes][1][price]:0,00
-# invoice[details_attributes][1][tax_rate_id]:411954
-# invoice[details_attributes][1][ledger_account_id]:
-# invoice[details_attributes][1][_destroy]:0
-# invoice[details_attributes][1][row_order]:
-# invoice[discount]:0,00

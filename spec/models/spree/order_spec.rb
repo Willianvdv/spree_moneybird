@@ -48,6 +48,12 @@ describe Spree::Order do
         SpreeMoneybird::Invoice.should_receive(:send_invoice).with(subject)
         subject.save!
       end
+
+      it 'creates the the moneybird payment' do
+        subject.payments << create(:payment)
+        SpreeMoneybird::Payment.should_receive(:create_payment_from_payment)
+        subject.save!
+      end
     end
   end
 

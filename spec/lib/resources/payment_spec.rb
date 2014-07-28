@@ -17,7 +17,7 @@ describe SpreeMoneybird::Payment do
 
   subject { create :payment,
                    order: order,
-                   amount: order.total }
+                   amount: order.total * 1.21 }
 
   describe 'saving a payment' do
     before do

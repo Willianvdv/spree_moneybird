@@ -3,9 +3,9 @@ module SpreeMoneybird
     def self.send_invoice(order)
       invoice = self.from_order order
 
-      # There must be a nicer way to do this
-      invoie_send_data = ({ invoice: { email: order.email } }).to_json
-      invoice.put :send_invoice, nil, invoie_send_data
+      invoie_send_data = ({ invoice: { email: order.email,
+                                       send_method: 'hand' } }).to_json
+      invoice.put :send_invoice, nil, invoie_send_data # There must be a nicer way to do this
 
       invoice
     end

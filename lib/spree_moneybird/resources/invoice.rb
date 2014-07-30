@@ -22,8 +22,6 @@ module SpreeMoneybird
     def self.from_order(order)
       return self.find(order.moneybird_id) unless order.moneybird_id.nil?
 
-      tax_rate = SpreeMoneybird::TaxRate.all.first # TODO: Fix hardcode tax setting
-
       moneybird_line_items = []
 
       # The normal line items
@@ -32,7 +30,7 @@ module SpreeMoneybird
           description: line_item.variant.name,
           amount: line_item.quantity,
           created_at: line_item.created_at,
-          tax_rate_id: tax_rate.id,
+          tax_rate_id: line_item.product.tax_category.moneybird_id,
           price: line_item.price }
       end
 
@@ -40,7 +38,7 @@ module SpreeMoneybird
       order.shipments.shipped.each do |shipment|
         moneybird_line_items << { description: shipment.shipping_method.name,
                                   price: order.ship_total,
-                                  tax_rate_id: tax_rate.id }
+                                  tax_rate_id: shipment.shipping_method.tax_rate.id }
       end
 
       attrs = { invoice: { contact_id: (order.user.moneybird_id if order.user),

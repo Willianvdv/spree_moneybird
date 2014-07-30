@@ -5,7 +5,7 @@ http_interactions:
     uri: https://mail%2Bapi%40willian.io:<MONEYBIRD_PASSWORD>@<MONEYBIRD_COMPANY>.moneybird.nl/contacts.json
     body:
       encoding: US-ASCII
-      string: ! '{"contact":{"customer_id":"265c2acf-a68a-40eb-831f-38066fce764e","contact_name_search":"Company","company_name":"Company","firstname":"John","lastname":"Doe","address1":"10
+      string: ! '{"contact":{"customer_id":"85d59747-5e63-438a-8c50-20f1f6fe0fe7","contact_name_search":"Company","company_name":"Company","firstname":"John","lastname":"Doe","address1":"10
         Lovely Street","address2":"Northwest","zipcode":"35005","city":"Herndon","country":"UNITED
         STATES"}}'
     headers:
@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 30 Jul 2014 12:58:23 GMT
+      - Wed, 30 Jul 2014 15:33:31 GMT
       Content-Type:
       - application/json; charset=utf-8
       Status:
@@ -37,20 +37,20 @@ http_interactions:
       Expires:
       - '0'
       Location:
-      - https://<MONEYBIRD_COMPANY>.moneybird.nl/contacts/2196524
+      - https://<MONEYBIRD_COMPANY>.moneybird.nl/contacts/2197269
       X-Ratelimit-Limit:
       - '350'
       X-Ratelimit-Remaining:
-      - '272'
+      - '338'
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Set-Cookie:
-      - birdflight=ca69e3b85f3491f773b61479452525a69d3ff1757dfc8e02f01562de1c5dfa7f72a4830a9d92ed2d38e4a5b39fd77c819663e325ab5171283474facf9cff6dcd;
+      - birdflight=8b716258f3f91ae21d3bf82f1667a8702db377d445fafbb16a46890411b5ef635e56e31c14aca5bbd0bcdfcf43ae30d31775e3483bbaf2016a12e36cf49ec398;
         domain=.moneybird.nl; path=/; secure; HttpOnly
       X-Request-Id:
-      - 87f76d0d411965b17d4eac7529a28c69
+      - f8f71e244dee7ab3918ea09887b90477
       X-Runtime:
-      - '0.199937'
+      - '0.194402'
       X-Powered-By:
       - Phusion Passenger
       X-Content-Type-Options:
@@ -63,134 +63,9 @@ http_interactions:
       - Keep-alive
     body:
       encoding: US-ASCII
-      string: ! '{"contact":{"address1":"10 Lovely Street","address2":"Northwest","attention":null,"bank_account":null,"chamber_of_commerce":null,"city":"Herndon","company_name":"Company","contact_hash":"24ed35467c9b9db9c5f898fdb3600d205575ec6e","country":"UNITED
-        STATES","created_at":"2014-07-30T14:58:23+02:00","customer_id":"265c2acf-a68a-40eb-831f-38066fce764e","email":null,"firstname":"John","id":2196524,"lastname":"Doe","phone":null,"send_method":"email","sepa_active":false,"sepa_bic":null,"sepa_iban":null,"sepa_iban_account_name":null,"sepa_mandate_date":null,"sepa_mandate_id":null,"tax_number":null,"updated_at":"2014-07-30T14:58:23+02:00","zipcode":"35005","gateways":[],"contact_name":"John
-        Doe","name":"Company","revision":1406725103,"notes":[]}}'
+      string: ! '{"contact":{"address1":"10 Lovely Street","address2":"Northwest","attention":null,"bank_account":null,"chamber_of_commerce":null,"city":"Herndon","company_name":"Company","contact_hash":"2d91607ff4cb8ce1736931165f294fc087eb49ec","country":"UNITED
+        STATES","created_at":"2014-07-30T17:33:31+02:00","customer_id":"85d59747-5e63-438a-8c50-20f1f6fe0fe7","email":null,"firstname":"John","id":2197269,"lastname":"Doe","phone":null,"send_method":"email","sepa_active":false,"sepa_bic":null,"sepa_iban":null,"sepa_iban_account_name":null,"sepa_mandate_date":null,"sepa_mandate_id":null,"tax_number":null,"updated_at":"2014-07-30T17:33:31+02:00","zipcode":"35005","gateways":[],"contact_name":"John
+        Doe","name":"Company","revision":1406734411,"notes":[]}}'
     http_version: 
-  recorded_at: Wed, 30 Jul 2014 12:58:23 GMT
-- request:
-    method: get
-    uri: https://mail%2Bapi%40willian.io:<MONEYBIRD_PASSWORD>@<MONEYBIRD_COMPANY>.moneybird.nl/tax_rates.json
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Wed, 30 Jul 2014 13:35:43 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Status:
-      - 200 OK
-      Strict-Transport-Security:
-      - max-age=31536000
-      Cache-Control:
-      - no-cache, no-store, must-revalidate
-      Pragma:
-      - no-cache
-      Expires:
-      - '0'
-      X-Ratelimit-Limit:
-      - '350'
-      X-Ratelimit-Remaining:
-      - '336'
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Set-Cookie:
-      - birdflight=f8d0d925f295623f8986c3fd9fa34303da2cb7152316f94945aa2a544929a4812127096aeb98669b58a3fee0ab6613cc014c5d6cf9b5f9d63b08105f4b31a98f;
-        domain=.moneybird.nl; path=/; secure; HttpOnly
-      X-Request-Id:
-      - b83735d2117d755ad97a6eb84b991480
-      X-Runtime:
-      - '0.108549'
-      X-Powered-By:
-      - Phusion Passenger
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - SAMEORIGIN
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - Keep-alive
-    body:
-      encoding: US-ASCII
-      string: ! '[{"tax_rate":{"active":true,"created_at":"2014-07-17T14:34:45+02:00","id":411954,"name":"21%
-        BTW","percentage":"21.0","report_reference":"NL/1a","show_tax":true,"tax_rate_order":null,"tax_rate_type":1,"taxed_item_type":0,"updated_at":"2014-07-17T14:34:45+02:00"}},{"tax_rate":{"active":true,"created_at":"2014-07-17T14:34:45+02:00","id":411955,"name":"6%
-        BTW","percentage":"6.0","report_reference":"NL/1b","show_tax":true,"tax_rate_order":null,"tax_rate_type":1,"taxed_item_type":0,"updated_at":"2014-07-17T14:34:45+02:00"}},{"tax_rate":{"active":true,"created_at":"2014-07-17T14:34:45+02:00","id":411956,"name":"0%
-        BTW","percentage":"0.0","report_reference":"NL/1e","show_tax":true,"tax_rate_order":null,"tax_rate_type":1,"taxed_item_type":0,"updated_at":"2014-07-17T14:34:45+02:00"}},{"tax_rate":{"active":true,"created_at":"2014-07-17T14:34:45+02:00","id":411957,"name":"21%
-        BTW","percentage":"21.0","report_reference":"NL/5b","show_tax":true,"tax_rate_order":null,"tax_rate_type":2,"taxed_item_type":0,"updated_at":"2014-07-17T14:34:45+02:00"}},{"tax_rate":{"active":true,"created_at":"2014-07-17T14:34:45+02:00","id":411958,"name":"6%
-        BTW","percentage":"6.0","report_reference":"NL/5b","show_tax":true,"tax_rate_order":null,"tax_rate_type":2,"taxed_item_type":0,"updated_at":"2014-07-17T14:34:45+02:00"}}]'
-    http_version: 
-  recorded_at: Wed, 30 Jul 2014 13:35:43 GMT
-- request:
-    method: put
-    uri: https://mail%2Bapi%40willian.io:<MONEYBIRD_PASSWORD>@<MONEYBIRD_COMPANY>.moneybird.nl/invoices//send_invoice.json
-    body:
-      encoding: US-ASCII
-      string: ! '{"invoice":{"email":"naomie.ebert@harber.co.uk","send_method":"hand"}}'
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - ! '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 404
-      message: Not Found
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Wed, 30 Jul 2014 13:35:43 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Status:
-      - 404 Not Found
-      Strict-Transport-Security:
-      - max-age=31536000
-      Cache-Control:
-      - no-cache, no-store, must-revalidate
-      Pragma:
-      - no-cache
-      Expires:
-      - '0'
-      X-Ratelimit-Limit:
-      - '350'
-      X-Ratelimit-Remaining:
-      - '335'
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Set-Cookie:
-      - birdflight=7f316563e16e08e4cfae5c5086093e82723a74f55389372a67b004007256bb88d664a5fe444d0e6f644b0c3b3ed510b4b173e5a3519a1b5b0bde270d89b06510;
-        domain=.moneybird.nl; path=/; secure; HttpOnly
-      X-Request-Id:
-      - fe545306dcdc4153d49192acd01761c9
-      X-Runtime:
-      - '0.102741'
-      X-Powered-By:
-      - Phusion Passenger
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - Keep-alive
-    body:
-      encoding: US-ASCII
-      string: ! ' '
-    http_version: 
-  recorded_at: Wed, 30 Jul 2014 13:35:43 GMT
+  recorded_at: Wed, 30 Jul 2014 15:33:31 GMT
 recorded_with: VCR 2.9.2

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SpreeMoneybird::Invoice do
+describe SpreeMoneybird::Invoice, vcr: true do
   before do
     Spree::Order.any_instance.stub(:sync_with_moneybird)
   end
@@ -14,7 +14,10 @@ describe SpreeMoneybird::Invoice do
   describe 'create an invoice' do
     context 'without contact syncronisation' do
       subject! do
-        SpreeMoneybird::Invoice.create_invoice_from_order(order)
+        VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice_without_contact' do
+          SpreeMoneybird::Invoice.create_invoice_from_order(order)
+        end
+
         order
       end
 
@@ -29,15 +32,23 @@ describe SpreeMoneybird::Invoice do
 
     context 'with contact syncronisation' do
       let!(:moneybird_contact) do
-        SpreeMoneybird::Contact.create_contact_from_order(order)
+        VCR.use_cassette 'SpreeMoneyBird::Invoice#create_contact' do
+          SpreeMoneybird::Contact.create_contact_from_order(order)
+        end
       end
 
       let!(:moneybird_invoice) do
-        SpreeMoneybird::Invoice.create_invoice_from_order(order)
+        VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice' do
+          SpreeMoneybird::Invoice.create_invoice_from_order(order)
+        end
       end
 
       # Reload so we get the actual contact_id and not our assigned one
-      subject { SpreeMoneybird::Invoice.find(moneybird_invoice.id) }
+      subject do
+        VCR.use_cassette 'SpreeMoneyBird::Invoice#find_invoice' do
+          SpreeMoneybird::Invoice.find(moneybird_invoice.id)
+        end
+      end
 
       it 'invoice has the moneybird contact id' do
         expect(subject.contact_id).to eql(moneybird_contact.id)
@@ -47,12 +58,17 @@ describe SpreeMoneybird::Invoice do
 
   describe 'send an invoice' do
     before do
-      SpreeMoneybird::Invoice.create_invoice_from_order(order)
+      VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice' do
+        SpreeMoneybird::Invoice.create_invoice_from_order(order)
+      end
       order.stub(:email) { 'mrwhite@example.com' }
     end
 
-    subject { SpreeMoneybird::Invoice.send_invoice(order) }
-
+    subject do
+      VCR.use_cassette 'SpreeMoneyBird::Invoice#send_invoice' do
+        SpreeMoneybird::Invoice.send_invoice(order)
+      end
+    end
     it 'sends the invoice' do
       expect(subject.email).not_to be_nil
     end

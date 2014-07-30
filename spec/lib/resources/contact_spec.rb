@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SpreeMoneybird::Contact do
+describe SpreeMoneybird::Contact, vcr: true do
   before do
     Spree::Order.any_instance.stub(:sync_with_moneybird)
   end
@@ -16,7 +16,9 @@ describe SpreeMoneybird::Contact do
     subject { order.user }
 
     before do
-      SpreeMoneybird::Contact.create_contact_from_order(order)
+      VCR.use_cassette 'SpreeMoneyBird#create_contact' do
+        SpreeMoneybird::Contact.create_contact_from_order(order)
+      end
     end
 
     it 'assigns the moneybird id' do

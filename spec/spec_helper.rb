@@ -10,6 +10,23 @@ SimpleCov.start do
   add_group 'Libraries', 'lib'
 end
 
+require 'vcr'
+
+VCR.configure do |c|
+  c.hook_into :webmock
+
+  c.cassette_library_dir = 'spec/cassettes'
+  c.default_cassette_options = { record: :new_episodes }
+
+  c.filter_sensitive_data('<MONEYBIRD_COMPANY>') { ENV['MONEYBIRD_COMPANY'] }
+  c.filter_sensitive_data('<MONEYBIRD_USER>') { URI.escape(ENV['MONEYBIRD_USER']) }
+  c.filter_sensitive_data('<MONEYBIRD_PASSWORD>') { ENV['MONEYBIRD_PASSWORD'] }
+end
+
+# RSpec.configure do |c|
+#   c.extend VCR::RSpec::Macros
+# end
+
 # Configure Rails Environment
 ENV['RAILS_ENV'] = 'test'
 

@@ -5,7 +5,7 @@ http_interactions:
     uri: https://mail%2Bapi%40willian.io:<MONEYBIRD_PASSWORD>@<MONEYBIRD_COMPANY>.moneybird.nl/contacts.json
     body:
       encoding: US-ASCII
-      string: ! '{"contact":{"customer_id":"85d59747-5e63-438a-8c50-20f1f6fe0fe7","contact_name_search":"Company","company_name":"Company","firstname":"John","lastname":"Doe","address1":"10
+      string: ! '{"contact":{"customer_id":"9dcf04e0-33b1-45e4-9ee1-cb1a1a4afa74","contact_name_search":"Company","company_name":"Company","firstname":"John","lastname":"Doe","address1":"10
         Lovely Street","address2":"Northwest","zipcode":"35005","city":"Herndon","country":"UNITED
         STATES"}}'
     headers:
@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 30 Jul 2014 15:33:31 GMT
+      - Wed, 30 Jul 2014 15:38:39 GMT
       Content-Type:
       - application/json; charset=utf-8
       Status:
@@ -37,20 +37,20 @@ http_interactions:
       Expires:
       - '0'
       Location:
-      - https://<MONEYBIRD_COMPANY>.moneybird.nl/contacts/2197269
+      - https://<MONEYBIRD_COMPANY>.moneybird.nl/contacts/2197296
       X-Ratelimit-Limit:
       - '350'
       X-Ratelimit-Remaining:
-      - '338'
+      - '327'
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Set-Cookie:
-      - birdflight=8b716258f3f91ae21d3bf82f1667a8702db377d445fafbb16a46890411b5ef635e56e31c14aca5bbd0bcdfcf43ae30d31775e3483bbaf2016a12e36cf49ec398;
+      - birdflight=70e1a424d4bfca2a0a0a9681a90eb9971e608f05807d0cb482ba812f2887b00206027e3fc6db1a1ab8fd8cde255cb45581c55dffe88d1499bd0617cce6efdaf5;
         domain=.moneybird.nl; path=/; secure; HttpOnly
       X-Request-Id:
-      - f8f71e244dee7ab3918ea09887b90477
+      - dd4dea842c8190a41d8e445d6dfb8051
       X-Runtime:
-      - '0.194402'
+      - '0.189147'
       X-Powered-By:
       - Phusion Passenger
       X-Content-Type-Options:
@@ -63,9 +63,9 @@ http_interactions:
       - Keep-alive
     body:
       encoding: US-ASCII
-      string: ! '{"contact":{"address1":"10 Lovely Street","address2":"Northwest","attention":null,"bank_account":null,"chamber_of_commerce":null,"city":"Herndon","company_name":"Company","contact_hash":"2d91607ff4cb8ce1736931165f294fc087eb49ec","country":"UNITED
-        STATES","created_at":"2014-07-30T17:33:31+02:00","customer_id":"85d59747-5e63-438a-8c50-20f1f6fe0fe7","email":null,"firstname":"John","id":2197269,"lastname":"Doe","phone":null,"send_method":"email","sepa_active":false,"sepa_bic":null,"sepa_iban":null,"sepa_iban_account_name":null,"sepa_mandate_date":null,"sepa_mandate_id":null,"tax_number":null,"updated_at":"2014-07-30T17:33:31+02:00","zipcode":"35005","gateways":[],"contact_name":"John
-        Doe","name":"Company","revision":1406734411,"notes":[]}}'
+      string: ! '{"contact":{"address1":"10 Lovely Street","address2":"Northwest","attention":null,"bank_account":null,"chamber_of_commerce":null,"city":"Herndon","company_name":"Company","contact_hash":"d0c935320e62513c187ca5a58405d6b783224701","country":"UNITED
+        STATES","created_at":"2014-07-30T17:38:39+02:00","customer_id":"9dcf04e0-33b1-45e4-9ee1-cb1a1a4afa74","email":null,"firstname":"John","id":2197296,"lastname":"Doe","phone":null,"send_method":"email","sepa_active":false,"sepa_bic":null,"sepa_iban":null,"sepa_iban_account_name":null,"sepa_mandate_date":null,"sepa_mandate_id":null,"tax_number":null,"updated_at":"2014-07-30T17:38:39+02:00","zipcode":"35005","gateways":[],"contact_name":"John
+        Doe","name":"Company","revision":1406734719,"notes":[]}}'
     http_version: 
-  recorded_at: Wed, 30 Jul 2014 15:33:31 GMT
+  recorded_at: Wed, 30 Jul 2014 15:38:38 GMT
 recorded_with: VCR 2.9.2

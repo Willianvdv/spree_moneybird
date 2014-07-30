@@ -5,13 +5,13 @@ http_interactions:
     uri: https://mail%2Bapi%40willian.io:<MONEYBIRD_PASSWORD>@<MONEYBIRD_COMPANY>.moneybird.nl/invoices.json
     body:
       encoding: US-ASCII
-      string: ! '{"invoice":{"contact_id":2197274,"contact_name_search":"Company","company_name":"Company","firstname":"John","lastname":"Doe","address1":"10
+      string: ! '{"invoice":{"contact_id":2197300,"contact_name_search":"Company","company_name":"Company","firstname":"John","lastname":"Doe","address1":"10
         Lovely Street","address2":"Northwest","zipcode":"35005","city":"Herndon","country":"UNITED
-        STATES","details_attributes":[{"description":"Product #11 - 7058","amount":1,"created_at":"2014-07-30T15:33:38.213Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
-        #12 - 1490","amount":1,"created_at":"2014-07-30T15:33:38.329Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
-        #13 - 6121","amount":1,"created_at":"2014-07-30T15:33:38.547Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
-        #14 - 3818","amount":1,"created_at":"2014-07-30T15:33:38.685Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
-        #15 - 7621","amount":1,"created_at":"2014-07-30T15:33:39.005Z","tax_rate_id":null,"price":"10.0"}]}}'
+        STATES","details_attributes":[{"description":"Product #11 - 7984","amount":1,"created_at":"2014-07-30T15:38:51.628Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
+        #12 - 9136","amount":1,"created_at":"2014-07-30T15:38:52.079Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
+        #13 - 7207","amount":1,"created_at":"2014-07-30T15:38:56.268Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
+        #14 - 5937","amount":1,"created_at":"2014-07-30T15:38:57.257Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
+        #15 - 5159","amount":1,"created_at":"2014-07-30T15:38:57.439Z","tax_rate_id":null,"price":"10.0"}]}}'
     headers:
       Content-Type:
       - application/json
@@ -27,7 +27,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 30 Jul 2014 15:33:42 GMT
+      - Wed, 30 Jul 2014 15:39:01 GMT
       Content-Type:
       - application/json; charset=utf-8
       Status:
@@ -41,20 +41,20 @@ http_interactions:
       Expires:
       - '0'
       Location:
-      - https://<MONEYBIRD_COMPANY>.moneybird.nl/invoices/3224685
+      - https://<MONEYBIRD_COMPANY>.moneybird.nl/invoices/3224718
       X-Ratelimit-Limit:
       - '350'
       X-Ratelimit-Remaining:
-      - '335'
+      - '324'
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Set-Cookie:
-      - birdflight=92b06c7c736ec28beb28b402b734814a672247d0f089929b8cb946e185bbca237ae0b41b28ece5c0d423091918ff3650ffae82fda81c47bddace3020065d1af6;
+      - birdflight=1e666dc0ed054150d93add4fd4408d888f82cf6b91bc2f2628a3e7b988f80542d8b7ebe0075ed4851e8855d8a854409af534a3faafc2364eed09833fb7486c63;
         domain=.moneybird.nl; path=/; secure; HttpOnly
       X-Request-Id:
-      - d977db87b01842b6b53090b3b38f19f0
+      - f377ec58468b8e899a608b0bbe23abd1
       X-Runtime:
-      - '0.415373'
+      - '0.252814'
       X-Powered-By:
       - Phusion Passenger
       X-Content-Type-Options:
@@ -67,12 +67,12 @@ http_interactions:
       - Keep-alive
     body:
       encoding: US-ASCII
-      string: ! '{"invoice":{"address1":"10 Lovely Street","address2":"Northwest","attention":null,"city":"Herndon","company_name":"Company","concept_id":227,"contact_id":2197274,"country":"UNITED
-        STATES","created_at":"2014-07-30T17:33:41+02:00","currency":"EUR","customer_id":"30552217-e651-4e2e-9029-669f7c5bad3c","description":"We
+      string: ! '{"invoice":{"address1":"10 Lovely Street","address2":"Northwest","attention":null,"city":"Herndon","company_name":"Company","concept_id":228,"contact_id":2197300,"country":"UNITED
+        STATES","created_at":"2014-07-30T17:39:01+02:00","currency":"EUR","customer_id":"c39e0f02-8a32-45b5-a97d-7d331a28738e","description":"We
         verzoeken u vriendelijk het bovenstaande bedrag van {document.total_price}
         voor {document.due_date} te voldoen op onze bankrekening onder vermelding
         van het factuurnummer {document.invoice_id}. Voor vragen kunt u contact opnemen
-        per e-mail.","discount":"0.0","due_date_interval":14,"exchange_rate":1,"firstname":"John","id":3224685,"invoice_date":"2014-07-30","invoice_hash":"750974e32be895105ab11b36fb136e59e6bd2227","invoice_id":null,"invoice_profile_id":1,"invoice_profile_version_id":null,"language":"nl","lastname":"Doe","original_estimate_id":null,"original_invoice_id":null,"po_number":null,"prices_are_incl_tax":false,"recurring_template_id":null,"send_method":"email","sepa_active":false,"show_customer_id":false,"show_tax":true,"show_tax_number":false,"state":"draft","tax_number":null,"total_price_excl_tax":"50.0","total_price_excl_tax_base":"50.0","total_price_incl_tax":"60.5","total_price_incl_tax_base":"60.5","updated_at":"2014-07-30T17:33:41+02:00","zipcode":"35005","contact_name":"John
+        per e-mail.","discount":"0.0","due_date_interval":14,"exchange_rate":1,"firstname":"John","id":3224718,"invoice_date":"2014-07-30","invoice_hash":"de5805941f472a47058927f71531ad94a0fdc566","invoice_id":null,"invoice_profile_id":1,"invoice_profile_version_id":null,"language":"nl","lastname":"Doe","original_estimate_id":null,"original_invoice_id":null,"po_number":null,"prices_are_incl_tax":false,"recurring_template_id":null,"send_method":"email","sepa_active":false,"show_customer_id":false,"show_tax":true,"show_tax_number":false,"state":"draft","tax_number":null,"total_price_excl_tax":"50.0","total_price_excl_tax_base":"50.0","total_price_incl_tax":"60.5","total_price_incl_tax_base":"60.5","updated_at":"2014-07-30T17:39:01+02:00","zipcode":"35005","contact_name":"John
         Doe","days_open":0,"email":"","invoice_email":"Geachte John Doe, \n\nIn de
         bijlage kunt u factuur {document.invoice_id} voor onze diensten vinden. Wij
         verzoeken u vriendelijk de factuur voor 13-08-2014 te voldoen.\n\nMet vriendelijke
@@ -80,15 +80,15 @@ http_interactions:
         de bijlage kunt u een herinnering voor factuur {document.invoice_id} vinden.
         Deze factuur is op 13-08-2014 verlopen, maar helaas hebben wij nog geen betaling
         ontvangen. Wij verzoeken u vriendelijk de factuur binnen vijf dagen te voldoen.\n\nMet
-        vriendelijke groet,\n\nwillian.dev","name":"Company","pay_url":"https://<MONEYBIRD_COMPANY>.moneybird.nl/invoice/b8aea89a7b2a525ec7c730a6fed5f8f5d422563f/750974e32be895105ab11b36fb136e59e6bd2227/pay","revision":1406734421,"sender_address":"<strong>willian.dev</strong><br
+        vriendelijke groet,\n\nwillian.dev","name":"Company","pay_url":"https://<MONEYBIRD_COMPANY>.moneybird.nl/invoice/bc8e99efb848af2170f1f97a5471e6f68b72e878/de5805941f472a47058927f71531ad94a0fdc566/pay","revision":1406734741,"sender_address":"<strong>willian.dev</strong><br
         />\nStraatnaam 12<br />\n1234AB Plaats<br />\n<br />\n<br />\ninfo@bedrijfsnaam.nl<br
         />\n<br />\n<br />\n<span class=\"caps\">KVK</span>: 12345678<br />\n<span
-        class=\"caps\">BTW</span>: NL123456789B01<br />\nBank: ","tax_components":[{"percentage":"0.21","tax_amount":"10.5","amount":"50.0","report_reference":"NL/1a"}],"total_discount":"-0.0","total_paid":0,"total_tax":"10.5","total_unpaid":"60.5","url":"https://<MONEYBIRD_COMPANY>.moneybird.nl/invoice/b8aea89a7b2a525ec7c730a6fed5f8f5d422563f/750974e32be895105ab11b36fb136e59e6bd2227","details":[{"amount":"1.0","created_at":"2014-07-30T17:33:41+02:00","description":"Product
-        #11 - 7058","id":11099706,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":411954,"updated_at":"2014-07-30T17:33:41+02:00","amount_plain":1,"tax":"0.21","total_price_excl_tax":"10.0","total_price_incl_tax":"12.1"},{"amount":"1.0","created_at":"2014-07-30T17:33:41+02:00","description":"Product
-        #12 - 1490","id":11099707,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":411954,"updated_at":"2014-07-30T17:33:41+02:00","amount_plain":1,"tax":"0.21","total_price_excl_tax":"10.0","total_price_incl_tax":"12.1"},{"amount":"1.0","created_at":"2014-07-30T17:33:41+02:00","description":"Product
-        #13 - 6121","id":11099708,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":411954,"updated_at":"2014-07-30T17:33:41+02:00","amount_plain":1,"tax":"0.21","total_price_excl_tax":"10.0","total_price_incl_tax":"12.1"},{"amount":"1.0","created_at":"2014-07-30T17:33:41+02:00","description":"Product
-        #14 - 3818","id":11099709,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":411954,"updated_at":"2014-07-30T17:33:41+02:00","amount_plain":1,"tax":"0.21","total_price_excl_tax":"10.0","total_price_incl_tax":"12.1"},{"amount":"1.0","created_at":"2014-07-30T17:33:41+02:00","description":"Product
-        #15 - 7621","id":11099710,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":411954,"updated_at":"2014-07-30T17:33:41+02:00","amount_plain":1,"tax":"0.21","total_price_excl_tax":"10.0","total_price_incl_tax":"12.1"}],"history":[{"action":"invoice_created","created_at":"2014-07-30T17:33:41+02:00","description":null,"email":null,"id":8954007,"updated_at":"2014-07-30T17:33:41+02:00","user_id":null}],"payments":[],"attachments":[]}}'
+        class=\"caps\">BTW</span>: NL123456789B01<br />\nBank: ","tax_components":[{"percentage":"0.21","tax_amount":"10.5","amount":"50.0","report_reference":"NL/1a"}],"total_discount":"-0.0","total_paid":0,"total_tax":"10.5","total_unpaid":"60.5","url":"https://<MONEYBIRD_COMPANY>.moneybird.nl/invoice/bc8e99efb848af2170f1f97a5471e6f68b72e878/de5805941f472a47058927f71531ad94a0fdc566","details":[{"amount":"1.0","created_at":"2014-07-30T17:39:01+02:00","description":"Product
+        #11 - 7984","id":11099849,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":411954,"updated_at":"2014-07-30T17:39:01+02:00","amount_plain":1,"tax":"0.21","total_price_excl_tax":"10.0","total_price_incl_tax":"12.1"},{"amount":"1.0","created_at":"2014-07-30T17:39:01+02:00","description":"Product
+        #12 - 9136","id":11099850,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":411954,"updated_at":"2014-07-30T17:39:01+02:00","amount_plain":1,"tax":"0.21","total_price_excl_tax":"10.0","total_price_incl_tax":"12.1"},{"amount":"1.0","created_at":"2014-07-30T17:39:01+02:00","description":"Product
+        #13 - 7207","id":11099851,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":411954,"updated_at":"2014-07-30T17:39:01+02:00","amount_plain":1,"tax":"0.21","total_price_excl_tax":"10.0","total_price_incl_tax":"12.1"},{"amount":"1.0","created_at":"2014-07-30T17:39:01+02:00","description":"Product
+        #14 - 5937","id":11099852,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":411954,"updated_at":"2014-07-30T17:39:01+02:00","amount_plain":1,"tax":"0.21","total_price_excl_tax":"10.0","total_price_incl_tax":"12.1"},{"amount":"1.0","created_at":"2014-07-30T17:39:01+02:00","description":"Product
+        #15 - 5159","id":11099853,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":411954,"updated_at":"2014-07-30T17:39:01+02:00","amount_plain":1,"tax":"0.21","total_price_excl_tax":"10.0","total_price_incl_tax":"12.1"}],"history":[{"action":"invoice_created","created_at":"2014-07-30T17:39:01+02:00","description":null,"email":null,"id":8954096,"updated_at":"2014-07-30T17:39:01+02:00","user_id":null}],"payments":[],"attachments":[]}}'
     http_version: 
-  recorded_at: Wed, 30 Jul 2014 15:33:41 GMT
+  recorded_at: Wed, 30 Jul 2014 15:39:00 GMT
 recorded_with: VCR 2.9.2

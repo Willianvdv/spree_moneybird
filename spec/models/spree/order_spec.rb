@@ -49,11 +49,14 @@ describe Spree::Order do
         subject.save!
       end
 
-      it 'creates the the moneybird payment' do
-        payment = create(:payment, order: subject, state: :completed)
-        subject.payments << payment
-        SpreeMoneybird::Payment.should_receive(:create_payment_from_payment).with(payment)
-        subject.save!
+      context 'with payments' do
+        let(:payment) { create :payment, order: subject, state: :completed }
+
+        it 'creates the the moneybird payment' do
+          SpreeMoneybird::Payment.should_receive(:create_payment_from_payment)
+                                 .with(payment)
+          subject.save!
+        end
       end
     end
   end

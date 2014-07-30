@@ -6,19 +6,14 @@ Nog niet klaar :)
 We <3 Moneybird & Spree
 
 ## Todo's
-- VCR for tests
 - Async moneybird post
-- Set the right tax setting
+- Ability to set the moneybird_id on the TaxCategory
 - Discounts
-- Shipping costs?
-- Register payments
 - Sync state (cancel / pending / etc)
-- Credit note
-- Email the invoice to the customer
 
 ## Tests
 
-**Don't use your production moneybird credentials!**
+**Don't use your production moneybird credentials for tests!**
 
 ```
 MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy bundle exec rspec
@@ -31,6 +26,6 @@ PROXY='http://127.0.0.1:8888' MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@m
 
 ## Eigenschappen
 
-- Voor elke completed order wordt een factuur gemaakt
+- Voor elke completed order wordt een (concept) factuur gemaakt
 - Completed payments worden als payment onder het factuur geboekt
 - Maakt een factuur definitief aan op het moment dat alle producten verzonden zijn. Hierdoor zijn er geen creditnota's nodig als er producten niet geleverd kunnen worden en uit de order gehaald worden.

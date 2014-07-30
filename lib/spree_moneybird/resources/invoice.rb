@@ -24,18 +24,24 @@ module SpreeMoneybird
 
       tax_rate = SpreeMoneybird::TaxRate.all.first # TODO: Fix hardcode tax setting
 
-      details_attributes = order.line_items.map do |line_item|
-        { description: line_item.variant.name,
+      moneybird_line_items = []
+
+      # The normal line items
+      order.line_items.each do |line_item|
+        moneybird_line_items << {
+          description: line_item.variant.name,
           amount: line_item.quantity,
           created_at: line_item.created_at,
           tax_rate_id: tax_rate.id,
           price: line_item.price }
       end
 
-      # This will add a shipment rule to the invoice
-      details_attributes << { description: "Verzending",
-                              price: order.ship_total,
-                              tax_rate_id: tax_rate.id }
+      # The shipments
+      order.shipments.shipped.each do |shipment|
+        moneybird_line_items << { description: shipment.shipping_method.name,
+                                  price: order.ship_total,
+                                  tax_rate_id: tax_rate.id }
+      end
 
       attrs = { invoice: { contact_id: (order.user.moneybird_id if order.user),
                            contact_name_search: order.billing_address.company,
@@ -47,9 +53,31 @@ module SpreeMoneybird
                            zipcode: order.billing_address.zipcode,
                            city: order.billing_address.city,
                            country: order.billing_address.country.iso_name,
-                           details_attributes: details_attributes } }
+                           details_attributes: moneybird_line_items } }
 
       self.new attrs
     end
   end
 end
+
+# A shipment looks like:
+# <Spree::Shipment:0x007fc3ecc09bc8> {
+#                       :id => 29,
+#                 :tracking => nil,
+#                   :number => "H15171705805",
+#                     :cost => 17.5,
+#               :shipped_at => Mon, 28 Jul 2014 13:40:10 UTC +00:00,
+#                 :order_id => 84,
+#               :address_id => nil,
+#                    :state => "shipped",
+#               :created_at => Mon, 28 Jul 2014 13:38:46 UTC +00:00,
+#               :updated_at => Mon, 28 Jul 2014 13:54:30 UTC +00:00,
+#        :stock_location_id => 1,
+#         :adjustment_total => 0.0,
+#     :additional_tax_total => 0.0,
+#              :promo_total => 0.0,
+#       :included_tax_total => 0.0,
+#           :pre_tax_amount => nil,
+#          :synced_to_paazl => false,
+#               :printed_at => nil
+# }

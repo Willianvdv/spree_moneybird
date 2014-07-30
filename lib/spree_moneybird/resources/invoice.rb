@@ -36,9 +36,10 @@ module SpreeMoneybird
 
       # The shipments
       order.shipments.shipped.each do |shipment|
-        moneybird_line_items << { description: shipment.shipping_method.name,
-                                  price: order.ship_total,
-                                  tax_rate_id: shipment.shipping_method.tax_rate.id }
+        moneybird_line_items << {
+          description: shipment.shipping_method.name,
+          price: order.ship_total,
+          tax_rate_id: shipment.shipping_method.tax_category.moneybird_id }
       end
 
       attrs = { invoice: { contact_id: (order.user.moneybird_id if order.user),

@@ -5,9 +5,9 @@ describe Spree::Order do
     subject { build :order_ready_to_ship }
 
     before do
-      SpreeMoneybird::Contact.stub(:create_contact_from_order)
-      SpreeMoneybird::Invoice.stub(:create_invoice_from_order)
-      SpreeMoneybird::Invoice.stub(:send_invoice)
+      SpreeMoneybird::Contact.stub :create_contact_from_order
+      SpreeMoneybird::Invoice.stub :create_invoice_from_order
+      SpreeMoneybird::Invoice.stub :send_invoice
     end
 
     it 'syncronizes contact' do
@@ -50,8 +50,9 @@ describe Spree::Order do
       end
 
       it 'creates the the moneybird payment' do
-        subject.payments << create(:payment)
-        SpreeMoneybird::Payment.should_receive(:create_payment_from_payment)
+        payment = create(:payment, order: subject, state: :completed)
+        subject.payments << payment
+        SpreeMoneybird::Payment.should_receive(:create_payment_from_payment).with(payment)
         subject.save!
       end
     end

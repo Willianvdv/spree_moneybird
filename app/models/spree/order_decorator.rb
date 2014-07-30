@@ -9,10 +9,16 @@ Spree::Order.class_eval do
     sync_moneybird_invoice
   end
 
+  def sync_payments_with_moneybird
+    payments.completed.each do |payment|
+      SpreeMoneybird::Payment.create_payment_from_payment(payment)
+    end
+  end
+
   def send_moneybird_invoice
     try do
       SpreeMoneybird::Invoice.send_invoice(self)
-      SpreeMoneybird::Payment.create_payment_from_payment(payments.last)
+      sync_payments_with_moneybird
     end
   end
 
@@ -29,6 +35,7 @@ Spree::Order.class_eval do
   def try
     yield
   rescue Exception => e
+    raise e unless Rails.env.production?
     Rails.logger.error e
     Appsignal.add_exception(e) if defined? Appsignal
   end

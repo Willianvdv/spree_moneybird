@@ -27,8 +27,7 @@ module SpreeMoneybird
       # The normal line items
       order.line_items.each do |line_item|
         moneybird_line_items << {
-          description: line_item.variant.h
-          name,
+          description: line_item.variant.name,
           amount: line_item.quantity,
           created_at: line_item.created_at,
           tax_rate_id: line_item.product.tax_category.moneybird_id,

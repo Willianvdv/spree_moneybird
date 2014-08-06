@@ -27,7 +27,8 @@ module SpreeMoneybird
       # The normal line items
       order.line_items.each do |line_item|
         moneybird_line_items << {
-          description: line_item.variant.name,
+          description: line_item.variant.h
+          name,
           amount: line_item.quantity,
           created_at: line_item.created_at,
           tax_rate_id: line_item.product.tax_category.moneybird_id,
@@ -58,25 +59,3 @@ module SpreeMoneybird
     end
   end
 end
-
-# A shipment looks like:
-# <Spree::Shipment:0x007fc3ecc09bc8> {
-#                       :id => 29,
-#                 :tracking => nil,
-#                   :number => "H15171705805",
-#                     :cost => 17.5,
-#               :shipped_at => Mon, 28 Jul 2014 13:40:10 UTC +00:00,
-#                 :order_id => 84,
-#               :address_id => nil,
-#                    :state => "shipped",
-#               :created_at => Mon, 28 Jul 2014 13:38:46 UTC +00:00,
-#               :updated_at => Mon, 28 Jul 2014 13:54:30 UTC +00:00,
-#        :stock_location_id => 1,
-#         :adjustment_total => 0.0,
-#     :additional_tax_total => 0.0,
-#              :promo_total => 0.0,
-#       :included_tax_total => 0.0,
-#           :pre_tax_amount => nil,
-#          :synced_to_paazl => false,
-#               :printed_at => nil
-# }

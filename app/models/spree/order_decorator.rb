@@ -16,6 +16,7 @@ Spree::Order.class_eval do
 
   def sync_payments_with_moneybird
     payments.completed.each do |payment|
+      next unless payment.moneybird_id.nil?
       SpreeMoneybird::Payment.create_payment_from_payment(payment)
     end
   end

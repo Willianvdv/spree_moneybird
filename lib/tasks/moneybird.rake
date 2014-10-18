@@ -1,7 +1,7 @@
 namespace :moneybird do
   task sync: :environment do
     # TODO: Filter out fully synced orders
-    syncable_orders = Spree::Order.complete.limit(10)
+    syncable_orders = Spree::Order.where('moneybird_invoice_sent_at is null')
 
     syncable_orders.each do |order|
       begin

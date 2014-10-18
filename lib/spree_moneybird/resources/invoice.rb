@@ -4,7 +4,11 @@ module SpreeMoneybird
       invoice = self.from_order order
       invoie_send_data = { invoice: { email: order.email,
                                       send_method: 'hand' } }
+
       invoice.put :send_invoice, nil, invoie_send_data.to_json # There must be a nicer way to do this
+
+      order.touch :moneybird_invoice_sent_at
+
       invoice
     end
 

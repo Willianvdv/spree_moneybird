@@ -55,7 +55,7 @@ module SpreeMoneybird
                            address2: order.billing_address.address2,
                            zipcode: order.billing_address.zipcode,
                            city: order.billing_address.city,
-                           country: order.billing_address.country.iso_name,
+                           country: order.billing_address.country.name,
                            details_attributes: moneybird_line_items } }
 
       self.new attrs

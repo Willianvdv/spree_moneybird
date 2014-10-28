@@ -1,5 +1,4 @@
 Spree::Order.class_eval do
-
   def sync_with_moneybird
     if moneybird_id.nil?
       sync_moneybird_contact if complete?

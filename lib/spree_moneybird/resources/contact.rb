@@ -11,7 +11,14 @@ module SpreeMoneybird
     end
 
     def self.from_order(order)
-      attrs = { contact: { customer_id: order.user.id,
+
+      # This is one big hack. If a contact is created in the webapp or using a
+      # guest checkout a new contact is created. Moneybird assigns automatically a
+      # new customer_id for this contact. This causes a id conflict where our user.id is
+      # already used for another contact
+      user_id = SecureRandom.uuid
+
+      attrs = { contact: { customer_id: user_id,
                            contact_name_search: order.billing_address.company,
                            company_name: order.billing_address.company,
                            firstname: order.billing_address.firstname,

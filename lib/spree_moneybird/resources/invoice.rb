@@ -61,7 +61,7 @@ module SpreeMoneybird
 
       # Guest checkout
       invoice_attrs[:contact_id] = order.user.moneybird_id unless order.user.nil?
-      
+
       self.new({ invoice: invoice_attrs })
     end
   end

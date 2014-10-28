@@ -26,7 +26,9 @@ Spree::Order.class_eval do
   end
 
   def sync_moneybird_contact
-    return unless user && user.moneybird_id.nil? # For guest checkouts
+    return if user.nil? # For guest checkouts
+    return unless user.moneybird_id.nil?
+
     SpreeMoneybird::Contact.create_contact_from_order(self)
   end
 

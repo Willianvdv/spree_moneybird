@@ -1,4 +1,7 @@
 Spree::Order.class_eval do
+  include ActiveSupport::Callbacks
+  define_callbacks :send_moneybird_invoice
+
   def sync_with_moneybird
     if moneybird_id.nil?
       sync_moneybird_contact if complete?
@@ -21,7 +24,9 @@ Spree::Order.class_eval do
   end
 
   def send_moneybird_invoice
-    SpreeMoneybird::Invoice.send_invoice(self)
+    run_callbacks :send_moneybird_invoice do
+      SpreeMoneybird::Invoice.send_invoice(self)
+    end
   end
 
   def sync_moneybird_contact

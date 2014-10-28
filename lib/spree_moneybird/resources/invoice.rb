@@ -46,7 +46,7 @@ module SpreeMoneybird
           tax_rate_id: shipment.shipping_method.tax_category.moneybird_id }
       end
 
-      attrs = { invoice: { contact_id: (order.user.moneybird_id if order.user),
+      attrs = { invoice: { contact_id: (order.user.id if order.user),
                            contact_name_search: order.billing_address.company,
                            company_name: order.billing_address.company,
                            firstname: order.billing_address.firstname,

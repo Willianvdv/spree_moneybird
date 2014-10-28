@@ -13,18 +13,18 @@ describe Spree::Order do
     it 'syncronizes contact' do
       SpreeMoneybird::Contact.should_receive(:create_contact_from_order)
                              .with(subject)
-      subject.save!
+      subject.sync_with_moneybird
     end
 
     it 'syncronizes invoice' do
       SpreeMoneybird::Invoice.should_receive(:create_invoice_from_order)
                              .with(subject)
-      subject.save!
+      subject.sync_with_moneybird
     end
 
     it 'does not send the moneybird invoice' do
       subject.should_not_receive(:send_moneybird_invoice)
-      subject.save!
+      subject.sync_with_moneybird
     end
 
     describe 'order is a guest checkout (it has no user)' do
@@ -34,7 +34,7 @@ describe Spree::Order do
 
       it 'does not sync the contact' do
         subject.should_not_receive(:send_moneybird_invoice)
-        subject.save!
+        subject.sync_with_moneybird
       end
     end
 
@@ -46,7 +46,7 @@ describe Spree::Order do
 
       it 'sends the moneybird invoice' do
         SpreeMoneybird::Invoice.should_receive(:send_invoice).with(subject)
-        subject.save!
+        subject.sync_with_moneybird
       end
 
       context 'with payments' do
@@ -55,7 +55,7 @@ describe Spree::Order do
         it 'creates the the moneybird payment' do
           SpreeMoneybird::Payment.should_receive(:create_payment_from_payment)
                                  .with(payment)
-          subject.save!
+          subject.sync_with_moneybird
         end
       end
     end

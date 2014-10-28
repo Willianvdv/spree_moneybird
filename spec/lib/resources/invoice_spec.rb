@@ -5,14 +5,12 @@ describe SpreeMoneybird::Invoice, vcr: true do
     Spree::Order.any_instance.stub(:sync_with_moneybird)
   end
 
-  let(:order) do
-    order = create :order_ready_to_ship
-    order.user.stub(:id) { SecureRandom.uuid } # Prevents 422 (duplicate customer id)
-    order
-  end
+  let(:order) { create :order_ready_to_ship }
 
   describe 'create an invoice' do
-    context 'without contact syncronisation' do
+    context 'without contact syncronisation (guest access)' do
+      before { order.stub(:user).and_return(nil) }
+
       subject! do
         VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice_without_contact' do
           SpreeMoneybird::Invoice.create_invoice_from_order(order)
@@ -31,21 +29,28 @@ describe SpreeMoneybird::Invoice, vcr: true do
     end
 
     context 'with contact syncronisation' do
-      let!(:moneybird_contact) do
-        VCR.use_cassette 'SpreeMoneyBird::Invoice#create_contact' do
-          SpreeMoneybird::Contact.create_contact_from_order(order)
-        end
+      before do
+        user = create :user
+        order.user = user
+        order.save!
+
+        Spree::User.any_instance.stub(:id) { SecureRandom.uuid } # Prevents 422 (duplicate customer id)
       end
 
-      let!(:moneybird_invoice) do
-        VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice' do
-          SpreeMoneybird::Invoice.create_invoice_from_order(order)
-        end
+      let(:moneybird_contact) do
+        SpreeMoneybird::Contact.create_contact_from_order(order)
+      end
+
+      let(:moneybird_invoice) do
+        SpreeMoneybird::Invoice.create_invoice_from_order(order)
       end
 
       # Reload so we get the actual contact_id and not our assigned one
       subject do
         VCR.use_cassette 'SpreeMoneyBird::Invoice#find_invoice' do
+          moneybird_contact
+          moneybird_invoice
+
           SpreeMoneybird::Invoice.find(moneybird_invoice.id)
         end
       end
@@ -61,6 +66,7 @@ describe SpreeMoneybird::Invoice, vcr: true do
       VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice' do
         SpreeMoneybird::Invoice.create_invoice_from_order(order)
       end
+
       order.stub(:email) { 'mrwhite@example.com' }
     end
 
@@ -69,6 +75,7 @@ describe SpreeMoneybird::Invoice, vcr: true do
         SpreeMoneybird::Invoice.send_invoice(order)
       end
     end
+
     it 'sends the invoice' do
       expect(subject.email).not_to be_nil
     end

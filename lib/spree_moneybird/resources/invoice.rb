@@ -46,19 +46,23 @@ module SpreeMoneybird
           tax_rate_id: shipment.shipping_method.tax_category.moneybird_id }
       end
 
-      attrs = { invoice: { contact_id: (order.user.id if order.user),
-                           contact_name_search: order.billing_address.company,
-                           company_name: order.billing_address.company,
-                           firstname: order.billing_address.firstname,
-                           lastname: order.billing_address.lastname,
-                           address1: order.billing_address.address1,
-                           address2: order.billing_address.address2,
-                           zipcode: order.billing_address.zipcode,
-                           city: order.billing_address.city,
-                           country: order.billing_address.country.name,
-                           details_attributes: moneybird_line_items } }
+      invoice_attrs = {
+        contact_name_search: order.billing_address.company,
+        company_name: order.billing_address.company,
+        firstname: order.billing_address.firstname,
+        lastname: order.billing_address.lastname,
+        address1: order.billing_address.address1,
+        address2: order.billing_address.address2,
+        zipcode: order.billing_address.zipcode,
+        city: order.billing_address.city,
+        country: order.billing_address.country.name,
+        details_attributes: moneybird_line_items
+      }
 
-      self.new attrs
+      # Guest checkout
+      invoice_attrs[:contact_id] = order.user.moneybird_id unless order.user.nil?
+      
+      self.new({ invoice: invoice_attrs })
     end
   end
 end

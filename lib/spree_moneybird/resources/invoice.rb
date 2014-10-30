@@ -27,34 +27,42 @@ module SpreeMoneybird
       return self.find(order.moneybird_id) unless order.moneybird_id.nil?
 
       moneybird_line_items = []
+      tax_rate_ids = []
 
       # The normal line items
       order.line_items.each do |line_item|
 
         tax_rate_id = line_item.adjustments.where(source_type: 'Spree::TaxRate').first.source_id
         if tax_rate_id
-          tax_rate_moneybird_id = Spree::TaxRates.find(tax_category_id).moneybird_id
+          moneybird_tax_rate_id = Spree::TaxRates.find(tax_category_id).moneybird_id
+          line_item_tax_id = moneybird_tax_rate_id
+          tax_rate_ids << moneybird_tax_rate_id
         else
           # reverse charge or 0% tax
           # if there is no tax on the line items Spree doesn't create an adjustment
           # we can not get the moneybird_id from the adjustment
-          tax_rate_moneybird_id = SpreeMoneybird.reversed_charge_tax_id
+          line_item_tax_id = SpreeMoneybird.reversed_charge_tax_id
+          tax_rate_ids << moneybird_tax_rate_id
         end
 
         moneybird_line_items << {
           description: line_item.variant.name,
           amount: line_item.quantity,
           created_at: line_item.created_at,
-          tax_rate_id: tax_rate_moneybird_id,
+          tax_rate_id: line_item_tax_id,
           price: line_item.price }
       end
+
+      # for the shipment tax id pick the most used tax rate on the invoice
+      # https://www.paazl.com/btw-verzendkosten-hoe-zit-het/
+      shipment_tax_id = tax_rate_ids.group_by(&:to_s).values.max_by(&:size).try(:first)
 
       # The shipments
       order.shipments.shipped.each do |shipment|
         moneybird_line_items << {
           description: shipment.shipping_method.name,
           price: order.ship_total,
-          tax_rate_id: shipment.shipping_method.tax_category.moneybird_id }
+          tax_rate_id: shipment_tax_id }
       end
 
       invoice_attrs = {

@@ -31,19 +31,20 @@ module SpreeMoneybird
 
       # The normal line items
       order.line_items.each do |line_item|
-
         tax_rate_id = line_item.adjustments.where(source_type: 'Spree::TaxRate').first.source_id
+
         if tax_rate_id
           moneybird_tax_rate_id = Spree::TaxRates.find(tax_category_id).moneybird_id
-          line_item_tax_id = moneybird_tax_rate_id
-          tax_rate_ids << moneybird_tax_rate_id
         else
           # reverse charge or 0% tax
           # if there is no tax on the line items Spree doesn't create an adjustment
           # we can not get the moneybird_id from the adjustment
-          line_item_tax_id = SpreeMoneybird.reversed_charge_tax_id
-          tax_rate_ids << moneybird_tax_rate_id
+          moneybird_tax_rate_id = SpreeMoneybird.reversed_charge_tax_id
         end
+
+        line_item_tax_id = moneybird_tax_rate_id
+        # add the id to an array to calculate the most used layer
+        tax_rate_ids << moneybird_tax_rate_id
 
         moneybird_line_items << {
           description: line_item.variant.name,

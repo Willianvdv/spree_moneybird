@@ -24,6 +24,12 @@ For debugging the API I use charles proxy. Simply add `PROXY` to env:
 PROXY='http://127.0.0.1:8888' MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy bundle exec rspec
 ```
 
+## BTW verlegd
+
+Verstuur je facturen waarbij de btw is verlegd?
+Configureer dan de `reversed_charge_tax_id` in de initializer.
+Hier dien je de ID van het BTW tarief "Verkoopfacturen > BTW verlegd" in te vullen.
+
 ## Eigenschappen
 
 - Voor elke completed order wordt een (concept) factuur gemaakt

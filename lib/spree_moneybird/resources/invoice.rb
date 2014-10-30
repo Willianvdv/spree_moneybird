@@ -30,11 +30,22 @@ module SpreeMoneybird
 
       # The normal line items
       order.line_items.each do |line_item|
+
+        tax_rate_id = line_item.adjustments.where(source_type: 'Spree::TaxRate').first.source_id
+        if tax_rate_id
+          tax_rate_moneybird_id = Spree::TaxRates.find(tax_category_id).moneybird_id
+        else
+          # reverse charge or 0% tax
+          # if there is no tax on the line items Spree doesn't create an adjustment
+          # we can not get the moneybird_id from the adjustment
+          tax_rate_moneybird_id = SpreeMoneybird.reversed_charge_tax_id
+        end
+
         moneybird_line_items << {
           description: line_item.variant.name,
           amount: line_item.quantity,
           created_at: line_item.created_at,
-          tax_rate_id: line_item.product.tax_category.moneybird_id,
+          tax_rate_id: tax_rate_moneybird_id,
           price: line_item.price }
       end
 

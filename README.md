@@ -6,8 +6,6 @@ Nog niet klaar :)
 We <3 Moneybird & Spree
 
 ## Todo's
-- Async moneybird post
-- Ability to set the moneybird_id on the TaxCategory
 - Discounts
 - Sync state (cancel / pending / etc)
 
@@ -16,13 +14,19 @@ We <3 Moneybird & Spree
 **Don't use your production moneybird credentials for tests!**
 
 ```
-MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy bundle exec rspec
+MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy MONEYBIRD_REVERSED_CHARGE_TAX_ID=my_tax_free_or_reversed_id bundle exec rspec
 ```
 
 For debugging the API I use charles proxy. Simply add `PROXY` to env:
 ```
-PROXY='http://127.0.0.1:8888' MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy bundle exec rspec
+PROXY='http://127.0.0.1:8888' MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy MONEYBIRD_REVERSED_CHARGE_TAX_ID=my_tax_free_or_reversed_id bundle exec rspec
 ```
+
+## BTW verlegd
+
+Verstuur je facturen waarbij de btw is verlegd?
+Configureer dan de `reversed_charge_tax_id` in de initializer.
+Hier dien je de ID van het BTW tarief "Verkoopfacturen > BTW verlegd" in te vullen.
 
 ## Eigenschappen
 

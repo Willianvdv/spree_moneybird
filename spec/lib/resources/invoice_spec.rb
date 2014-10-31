@@ -7,9 +7,40 @@ describe SpreeMoneybird::Invoice, vcr: true do
 
   let(:order) { create :order_ready_to_ship }
 
+  describe '.moneybird_tax_rate_id' do
+    context 'line item has a tax rate' do
+      before { Spree::TaxRate.any_instance.stub(:moneybird_id).and_return(:moneybird_id) }
+
+      let(:tax_adjustment) { create :tax_adjustment }
+      let(:line_item) { tax_adjustment.adjustable }
+
+      subject { SpreeMoneybird::Invoice.moneybird_tax_rate_id(line_item) }
+
+      it 'has a tax rate' do
+        expect(subject).to eq :moneybird_id
+      end
+    end
+
+    context 'line item has no adjustment' do
+      before { SpreeMoneybird.reversed_charge_tax_id = :reversed_charge_tax_id }
+
+      let(:line_item) { create :line_item }
+
+      subject { SpreeMoneybird::Invoice.moneybird_tax_rate_id(line_item) }
+
+      it 'has not adjustment' do
+        expect(subject).to eq :reversed_charge_tax_id
+      end
+    end
+  end
+
   describe 'create an invoice' do
+
     context 'without contact syncronisation (guest access)' do
-      before { order.stub(:user).and_return(nil) }
+      before do
+        order.stub(:user).and_return(nil)
+        SpreeMoneybird.reversed_charge_tax_id = ENV['MONEYBIRD_REVERSED_CHARGE_TAX_ID']
+      end
 
       subject! do
         VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice_without_contact' do

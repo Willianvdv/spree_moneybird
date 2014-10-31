@@ -6,6 +6,7 @@ module SpreeMoneybird
   mattr_accessor :company
   mattr_accessor :api
   mattr_accessor :password
+  mattr_accessor :reversed_charge_tax_id
 
   def self.setup
     yield self

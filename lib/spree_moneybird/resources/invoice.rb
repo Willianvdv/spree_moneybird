@@ -34,7 +34,7 @@ module SpreeMoneybird
           description: line_item.variant.name,
           amount: line_item.quantity,
           created_at: line_item.created_at,
-          tax_rate_id: line_item.product.tax_category.moneybird_id,
+          tax_rate_id: self.moneybird_tax_rate_id(line_item),
           price: line_item.price }
       end
 
@@ -43,7 +43,7 @@ module SpreeMoneybird
         moneybird_line_items << {
           description: shipment.shipping_method.name,
           price: order.ship_total,
-          tax_rate_id: shipment.shipping_method.tax_category.moneybird_id }
+          tax_rate_id: self.moneybird_tax_rate_id(shipment) }
       end
 
       invoice_attrs = {
@@ -63,6 +63,19 @@ module SpreeMoneybird
       invoice_attrs[:contact_id] = order.user.moneybird_id unless order.user.nil?
 
       self.new({ invoice: invoice_attrs })
+    end
+
+    def self.moneybird_tax_rate_id(taxable)
+      if (tax_rate = taxable.adjustments.where(source_type: 'Spree::TaxRate').first)
+        line_item_tax_id = Spree::TaxRate.find(tax_rate.source_id).moneybird_id
+      else
+        # reverse charge or 0% tax
+        # if there is no tax on the line items Spree doesn't create an adjustment
+        # we can not get the moneybird_id from the adjustment
+        line_item_tax_id = SpreeMoneybird.reversed_charge_tax_id
+      end
+
+      line_item_tax_id
     end
   end
 end

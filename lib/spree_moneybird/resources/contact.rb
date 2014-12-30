@@ -11,6 +11,11 @@ module SpreeMoneybird
     end
 
     def self.from_order(order)
+      # Override this method if you want to update the contact attributes
+      self.base_from_order order
+    end
+
+    def self.base_from_order(order)
 
       # This is one big hack. If a contact is created in the webapp or using a
       # guest checkout a new contact is created. Moneybird assigns automatically a

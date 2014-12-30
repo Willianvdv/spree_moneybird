@@ -24,6 +24,11 @@ module SpreeMoneybird
     end
 
     def self.from_order(order)
+      # Override this method if you want to update the order attributes
+      self.base_from_order order
+    end
+
+    def self.base_from_order(order)
       return self.find(order.moneybird_id) unless order.moneybird_id.nil?
 
       moneybird_line_items = []

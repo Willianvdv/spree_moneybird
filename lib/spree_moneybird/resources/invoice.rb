@@ -62,7 +62,7 @@ module SpreeMoneybird
         city: order.billing_address.city,
         country: order.billing_address.country.name,
         details_attributes: moneybird_line_items,
-        reference: order.number
+        po_number: order.number
       }
 
       # Guest checkout

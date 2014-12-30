@@ -61,7 +61,8 @@ module SpreeMoneybird
         zipcode: order.billing_address.zipcode,
         city: order.billing_address.city,
         country: order.billing_address.country.name,
-        details_attributes: moneybird_line_items
+        details_attributes: moneybird_line_items,
+        reference: order.number
       }
 
       # Guest checkout

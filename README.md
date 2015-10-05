@@ -1,9 +1,6 @@
-Nog niet klaar :)
-
-
 #Spree Moneybird
 
-We <3 Moneybird & Spree
+Creates Moneybrid invoices for orders placed in your Spree webshop.
 
 ## Todo's
 - Discounts

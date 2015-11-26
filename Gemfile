@@ -6,6 +6,7 @@ gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-2-stable'
 gem 'figaro'
 
 group :development, :test do
+  gem 'pry'
   gem 'webmock'
   gem 'vcr'
 end

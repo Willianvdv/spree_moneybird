@@ -64,18 +64,14 @@ describe Spree::Order do
   describe 'discounted order' do
     it 'creates the moneybird invoice' do
       order = create :order_with_line_items, line_items_count: 1
+
       line_item = order.line_items.first
-
       line_item.price = 20
-      # line_item.tax_category = tax_rate.tax_category
-      line_item.save
+      line_item.save!
 
-      calculator = Spree::Calculator::FlatRate.new(preferred_amount: 10)
-
-      promotion = Spree::Promotion.create(name: 'beetje korting')
       promotion_action = Spree::Promotion::Actions::CreateItemAdjustments.create \
-        calculator: calculator,
-        promotion: promotion
+        calculator: Spree::Calculator::FlatRate.new(preferred_amount: 10),
+        promotion: Spree::Promotion.create(name: 'beetje korting')
 
       create :adjustment, source: promotion_action, adjustable: order
 

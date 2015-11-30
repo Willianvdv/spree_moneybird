@@ -35,19 +35,39 @@ describe SpreeMoneybird::Invoice, vcr: true do
   end
 
   describe 'create an invoice' do
+    context 'for a discounted order' do
+      it 'creates a negative order rule' do
+        order = create :order_with_line_items, line_items_count: 1
+
+        line_item = order.line_items.first
+        line_item.price = 20
+        line_item.save!
+
+        promotion_action = Spree::Promotion::Actions::CreateItemAdjustments.create \
+          calculator: Spree::Calculator::FlatRate.new(preferred_amount: 10),
+          promotion: Spree::Promotion.create(name: 'beetje korting')
+
+        create :adjustment, source: promotion_action, adjustable: order
+
+        Spree::ItemAdjustments.new(line_item)
+        SpreeMoneybird::Invoice::create_invoice_from_order order
+
+        # TODO: Add a check that verifies the total amount
+      end
+    end
 
     context 'without contact syncronisation (guest access)' do
-      before do
-        order.stub(:user).and_return(nil)
-        SpreeMoneybird.reversed_charge_tax_id = ENV['MONEYBIRD_REVERSED_CHARGE_TAX_ID']
-      end
-
       subject! do
         VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice_without_contact' do
           SpreeMoneybird::Invoice.create_invoice_from_order(order)
         end
 
         order
+      end
+
+      before do
+        order.stub(:user).and_return(nil)
+        SpreeMoneybird.reversed_charge_tax_id = ENV['MONEYBIRD_REVERSED_CHARGE_TAX_ID']
       end
 
       it 'stores the moneybird id' do
@@ -93,18 +113,18 @@ describe SpreeMoneybird::Invoice, vcr: true do
   end
 
   describe 'send an invoice' do
+    subject do
+      VCR.use_cassette 'SpreeMoneyBird::Invoice#send_invoice' do
+        SpreeMoneybird::Invoice.send_invoice(order)
+      end
+    end
+
     before do
       VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice' do
         SpreeMoneybird::Invoice.create_invoice_from_order(order)
       end
 
       order.stub(:email) { 'mrwhite@example.com' }
-    end
-
-    subject do
-      VCR.use_cassette 'SpreeMoneyBird::Invoice#send_invoice' do
-        SpreeMoneybird::Invoice.send_invoice(order)
-      end
     end
 
     it 'sends the invoice' do

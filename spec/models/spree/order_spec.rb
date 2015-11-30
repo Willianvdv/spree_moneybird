@@ -8,6 +8,7 @@ describe Spree::Order do
       SpreeMoneybird::Contact.stub :create_contact_from_order
       SpreeMoneybird::Invoice.stub :create_invoice_from_order
       SpreeMoneybird::Invoice.stub :send_invoice
+
     end
 
     it 'syncronizes contact' do
@@ -58,26 +59,6 @@ describe Spree::Order do
           subject.sync_with_moneybird
         end
       end
-    end
-  end
-
-  describe 'discounted order' do
-    it 'creates the moneybird invoice' do
-      order = create :order_with_line_items, line_items_count: 1
-
-      line_item = order.line_items.first
-      line_item.price = 20
-      line_item.save!
-
-      promotion_action = Spree::Promotion::Actions::CreateItemAdjustments.create \
-        calculator: Spree::Calculator::FlatRate.new(preferred_amount: 10),
-        promotion: Spree::Promotion.create(name: 'beetje korting')
-
-      create :adjustment, source: promotion_action, adjustable: order
-
-      Spree::ItemAdjustments.new(line_item)
-
-      binding.pry
     end
   end
 

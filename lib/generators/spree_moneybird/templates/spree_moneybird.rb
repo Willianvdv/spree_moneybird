@@ -5,4 +5,7 @@ SpreeMoneybird.setup do |config|
 
   # Verkoopfacturen > BTW verlegd Geen BTW op factuur NL/1e
   config.reversed_charge_tax_id = 'your_moneybird_reversed_charge_tax_id'
+
+  # Used for discounts
+  config.nil_tax_id = 'your_moneybird_nil_charge_tax_id'
 end

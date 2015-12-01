@@ -51,14 +51,14 @@ module SpreeMoneybird
           tax_rate_id: self.moneybird_tax_rate_id(shipment) }
       end
 
-      binding.pry
-
-      # BIG FAT NOTE:
-      # Moneybird only accepts a percent as discount. We calculate back what our
-      # discount in percents is. This isn't super precise (missing cents) but 
-      # for our shop we correct this manually, for now.
-      discount_as_percent = \
-        (order.promo_total.abs / (order.shipment_total + order.item_total)) * 100
+      # Discounts
+      if order.promo_total.abs > 0
+        moneybird_line_items << {
+          description: 'Korting',
+          price: order.promo_total,
+          tax_rate_id: SpreeMoneybird.nil_tax_id,
+        }
+      end
 
       invoice_attrs = {
         contact_name_search: order.billing_address.company,

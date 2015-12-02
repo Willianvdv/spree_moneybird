@@ -93,4 +93,59 @@ http_interactions:
         #7 - 2340","id":12890469,"ledger_account_id":1081089,"price":"10.0","row_order":null,"tax_rate_id":455130,"updated_at":"2014-10-31T13:34:11+01:00","amount_plain":1,"tax":0,"total_price_excl_tax":"10.0","total_price_incl_tax":"10.0"}],"history":[{"action":"invoice_created","created_at":"2014-10-31T13:34:11+01:00","description":null,"email":null,"id":10330545,"updated_at":"2014-10-31T13:34:11+01:00","user_id":null}],"payments":[],"attachments":[],"transactions":[]}}'
     http_version: 
   recorded_at: Fri, 31 Oct 2014 12:34:11 GMT
+- request:
+    method: post
+    uri: https://info%40<MONEYBIRD_COMPANY>.com:<MONEYBIRD_PASSWORD>@<MONEYBIRD_COMPANY>.moneybird.nl/invoices.json
+    body:
+      encoding: UTF-8
+      string: '{"invoice":{"contact_name_search":"Company","company_name":"Company","firstname":"John","lastname":"Doe","address1":"10
+        Lovely Street","address2":"Northwest","zipcode":"35005","city":"Herndon","country":"United
+        States of America","details_attributes":[{"description":"Product #2 - 3656","amount":1,"created_at":"2015-12-02T19:42:28.906Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
+        #3 - 8840","amount":1,"created_at":"2015-12-02T19:42:28.993Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
+        #4 - 7141","amount":1,"created_at":"2015-12-02T19:42:29.072Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
+        #5 - 6146","amount":1,"created_at":"2015-12-02T19:42:29.213Z","tax_rate_id":null,"price":"10.0"},{"description":"Product
+        #6 - 3176","amount":1,"created_at":"2015-12-02T19:42:29.294Z","tax_rate_id":null,"price":"10.0"}],"contact_id":null}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 02 Dec 2015 19:42:29 GMT
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 401 Unauthorized
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Www-Authenticate:
+      - Basic realm="MoneyBird"
+      X-Request-Id:
+      - 88d55f3581082a03376f0874e571cbbd
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      X-Runtime:
+      - '0.011605'
+      X-Powered-By:
+      - Phusion Passenger Enterprise
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 02 Dec 2015 19:42:29 GMT
 recorded_with: VCR 2.9.2

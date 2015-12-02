@@ -53,9 +53,13 @@ module SpreeMoneybird
 
       # Discounts
       if order.promo_total.abs > 0
+        #
+        # WHOOOOP WHOOOOP HARDCODE GALORE
+        #
+        tax_on_discount = (order.promo_total / 121) * 21
         moneybird_line_items << {
           description: 'Korting',
-          price: order.promo_total,
+          price: order.promo_total - tax_on_discount,
           tax_rate_id: SpreeMoneybird.discount_tax_id
         }
       end

@@ -56,7 +56,7 @@ module SpreeMoneybird
         moneybird_line_items << {
           description: 'Korting',
           price: order.promo_total,
-          tax_rate_id: SpreeMoneybird.nil_tax_id,
+          tax_rate_id: SpreeMoneybird.discount_tax_id
         }
       end
 

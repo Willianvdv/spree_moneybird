@@ -37,7 +37,7 @@ describe SpreeMoneybird::Invoice, vcr: true do
   describe 'create an invoice' do
     context 'for a discounted order' do
       it 'creates a negative order rule' do
-        SpreeMoneybird.nil_tax_id = ENV['MONEYBIRD_NIL_TAX_ID']
+        SpreeMoneybird.discount_tax_id = ENV['MONEYBIRD_DISCOUNT_TAX_ID']
 
         order = create :order_with_line_items, line_items_count: 1
 
@@ -52,7 +52,7 @@ describe SpreeMoneybird::Invoice, vcr: true do
         create :adjustment, source: promotion_action, adjustable: order
 
         Spree::ItemAdjustments.new(line_item)
-        VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice_with_discount' do
+        VCR.use_cassette 'SpreeMoneyBird::Invoice#create_invoice_with_discounts' do
           SpreeMoneybird::Invoice::create_invoice_from_order order
         end
 

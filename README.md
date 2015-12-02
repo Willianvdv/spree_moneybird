@@ -11,12 +11,12 @@ Creates Moneybrid invoices for orders placed in your Spree webshop.
 **Don't use your production moneybird credentials for tests!**
 
 ```
-MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy MONEYBIRD_REVERSED_CHARGE_TAX_ID=my_tax_free_or_reversed_id MONEYBIRD_NIL_TAX_ID=my_nil_tax_id bundle exec rspec
+MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy MONEYBIRD_REVERSED_CHARGE_TAX_ID=my_tax_free_or_reversed_id MONEYBIRD_DISCOUNT_TAX_ID=my_nil_tax_id bundle exec rspec
 ```
 
 For debugging the API I use charles proxy. Simply add `PROXY` to env:
 ```
-PROXY='http://127.0.0.1:8888' MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy MONEYBIRD_REVERSED_CHARGE_TAX_ID=my_tax_free_or_reversed_id MONEYBIRD_NIL_TAX_ID=my_nil_tax_id bundle exec rspec
+PROXY='http://127.0.0.1:8888' MONEYBIRD_COMPANY=mycompany MONEYBIRD_USER='info@mycompany.com' MONEYBIRD_PASSWORD=ilikekittensverymuchy MONEYBIRD_REVERSED_CHARGE_TAX_ID=my_tax_free_or_reversed_id MONEYBIRD_DISCOUNT_TAX_ID=my_nil_tax_id bundle exec rspec
 ```
 
 ## BTW verlegd

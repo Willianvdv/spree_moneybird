@@ -7,5 +7,5 @@ SpreeMoneybird.setup do |config|
   config.reversed_charge_tax_id = 'your_moneybird_reversed_charge_tax_id'
 
   # Used for discounts
-  config.nil_tax_id = 'your_moneybird_nil_charge_tax_id'
+  config.discount_tax_id = 'your_moneybird_nil_charge_tax_id'
 end

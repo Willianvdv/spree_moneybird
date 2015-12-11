@@ -76,7 +76,6 @@ module SpreeMoneybird
         country: order.billing_address.country.name,
         details_attributes: moneybird_line_items,
         po_number: order.number,
-        discount: discount_as_percent,
         details_attributes: moneybird_line_items
       }
 

@@ -64,6 +64,16 @@ module SpreeMoneybird
         }
       end
 
+      # When tax is reverse changed. (tax_reverse_charged? & vat_number are custom
+      # fields)
+      if order.tax_reverse_charged?
+        moneybird_line_items << {
+          description: "BTW verlegd naar #{order.vat_number}",
+          price: 0,
+          tax_rate_id: SpreeMoneybird.reversed_charge_tax_id
+        }
+      end
+
       invoice_attrs = {
         contact_name_search: order.billing_address.company,
         company_name: order.billing_address.company,
